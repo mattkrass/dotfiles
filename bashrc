@@ -1,7 +1,4 @@
 # ENVIRONMENT VARIABLES
-    export MBIG="/bb/mbige/mbig4627"
-    export FAMKE_BUILDBASE=${MBIG}/famke
-    export PROJDIR=${MBIG}/projects
 
 #ALIASES
     alias lrt="ls -lrt"
@@ -29,14 +26,6 @@
     alias gvim="gvim -geometry 160x100"
     alias vi="vim"
     alias more="less"
-    alias runbig="/bbsrc/prodbigs/sun/faxbig.tsk mbig4627 &"
-    alias runbigfg="clear;/bbsrc/prodbigs/sun/faxbig.tsk mbig4627"
-    alias sctd="ssh clang-tidy-dev.fit-trading.dob1.bcpc.bloomberg.com"
-    alias sct="ssh clang-tidy.fit-trading.dob1.bcpc.bloomberg.com"
-    alias stpnsd="sftp -i ${PROJDIR}/sshkeys/stpnsd.key -P 30206 STPNSD@ftp1ny.bloomberg.com"
-    alias tstnsd="sftp -i ${PROJDIR}/sshkeys/stpnsd.key -P 30206 TSTNSD@ftp1ny.bloomberg.com"
-    alias fsscb1="sftp -i ${PROJDIR}/sshkeys/stpnsd.key -P 30206 FSSCB@ftp1ny.bloomberg.com"
-    alias fsscb2="sftp -i ${PROJDIR}/sshkeys/stpnsd.key -P 30206 FSSCB@ftp2ny.bloomberg.com"
     alias xtermbig="\xterm -fg \#ff9922 -cr \#ff9922 -bg black -fn 10x20 -e ${SHELL}"
     alias xtermas="\xterm -bg \#282828 -cr \#ffaa00 -fg \#ffaa00 -fn 10x20 -e ${SHELL}"
     alias xtermws="\xterm -bg \#dddddd -fg black -fn 6x13 -e ${SHELL}"
@@ -56,117 +45,28 @@
     alias jrnl="\xterm -fg \#ff9922 -cr \#ff9922 -bg black -fn 10x20 -geometry 70x60 -title Journal -e /bin/vi ${PROJDIR}/journal.txt &"
     alias logterm="\xterm -bg \#222222 -fg yellow -cr yellow -fn 6x13 -e /bin/bash&"
     alias logterm2="\xterm -bg \#666666 -fg yellow -cr yellow -fn 6x13 -e /bin/bash&"
-    alias renew="/opt/quest/bin/vastool kinit"
-    alias pl="plink -d stage -noso"
-    alias pla="plink -d stage -noso -all"
-    alias ecl="eclipse > /dev/null 2>&1 &"
     alias pyg="pygmentize -O style=monokai -f terminal256 -g"
     alias less="less -r"
-
     alias gvimT="gvim -fg black -bg \#dddddd -fn '-*-consolas-medium-r-*-*-26-*-95-*-m-0-suneu-*' "
     alias xtermT="\xterm -fg black -cr black -bg \#dddddd -fn '-*-consolas-medium-r-*-*-26-*-95-*-m-0-suneu-*' -e ${SHELL}"
-
-    alias ctags="/bbsrc/princeton/skunk/bin/ctags"
-
-    alias print_src="a2ps -1 --line-numbers=1 -P${PRINTER:-prog_P271}"
-    #alias print_src_color="a2ps -1 --pro=color --line-numbers=1 -P${PRINTER:-prog_P271}"
-
-    alias mbig="cd ${MBIG}"
-    alias proj="cd ${PROJDIR}"
-    alias cfmgmt="cd ${PROJDIR}/cfmgmt"
-    alias fstnblot="cd ${PROJDIR}/cfmgmt/fstnblot/s_fstnblot"
-    alias fstnxfer="cd ${PROJDIR}/cfmgmt/fstnxfer"
     alias green_font="echo -e \"\e[32m\" "
     alias white_font="echo -e \"\e[0;37m\" "
     alias cyan_font="echo -e \"\e[0;36m\" "
     alias reset_font="echo -e \"\e[0m\" "
     alias xts="xts.sh"
-    alias eclipse_wizard="~pshepher/bin/eclipse_wizard.py"
-    alias prd0278="prdwin n278"
-    alias prd0279="prdwin p279"
-    alias prd0501="prdwin sundev19"
-    alias prd0907="prdwin y907"
-    alias prd0908="prdwin j908"
-    alias prd0890="prdwin p890"
-    alias prd0889="prdwin n889"
-    alias prd1743="prdwin y743"
-    alias prd1081="prdwin j081"
-    alias prd2225="prdwin k225"
-    alias prd1305="prdwin j305"
-    alias prd1135="prdwin y135"
-    alias prd1136="prdwin j136"
-    alias prd0966="prdwin ficlnybfitap01"
-    alias prd0969="prdwin ficlnjbfitap01"
-    alias prd4472="prdwin g0qa"
-    alias sd48='ssh sundev48'
-    alias sd47='ssh sundev47'
-    alias sd38='ssh sundev38'
-    alias nyl01='ssh ficlnydficev01'
-    alias njl01='ssh ficlnjdficev01'
     alias h="fc -l -100"
     alias rbrc="unalias -a; TMUX= source ~/.bashrc"
     alias mstr="git checkout master"
     alias mkr1="git checkout mkrass1"
     alias cdc="cd;clear"
-    alias jpssi="./setWindowTitle.py 'Jurassic Park, System Security Interface, Version 4.0.5, Alpha E'"
 
 # FUNCTIONS
     npad() {
-        # \xterm -fg \#22ff22 -cr \#22ff22 -bg black -fn 10x20 -geometry 70x60 -title $1 -e /bin/vi $1 &
         gvim -geometry 70x60 $1 
     }
 
     mcd() {
         mkdir -p $1; cd $1
-    }
-
-    ghc() {
-        git clone bbgithub:$1 $1
-    }
-
-    tmux-prod-colors() {
-        if [ $TMUX ]; then
-            ${PROJDIR}/tmux/tmux select-pane -P 'fg=colour2,bg=colour17'
-        fi
-    }
-
-    tmux-remote-colors() {
-        if [ $TMUX ]; then
-            ${PROJDIR}/tmux/tmux select-pane -P 'fg=colour6,bg=colour21'
-        fi
-    }
-
-    tmux-default-colors() {
-        if [ $TMUX ]; then
-            ${PROJDIR}/tmux/tmux select-pane -P 'default'
-        fi
-    }
-
-    prdwinf() {
-        tmux-prod-colors
-        clear
-        getprdwin -u op1 -s $1 -i -d etc 
-        tmux-default-colors
-    }
-
-    prdwin() {
-        if [ $SSH_TTY ]; then
-            echo "You shouldn't do this from a ssh remote!"
-            return 1
-        fi
-        prdwinf $1
-    }
-
-    ssh() {
-        #tmux-remote-colors
-        clear
-        command ssh "$@"
-        tmux-default-colors
-    }
-
-    ssh-nc() {
-        clear
-        command ssh "$@"
     }
 
     tm() {
@@ -191,25 +91,6 @@
         fi
     }
 
-    migrate-svn-to-git()
-    {
-        if [[ -z $2 ]]; then
-            echo 'Provide SVN path and org name!'
-            return 1
-        fi
-
-        REPONAME=`echo $1 | sed -e 's,\(.*\/\)\(.*\),\2,'`
-        echo Cloning $1 in to $REPONAME
-        git svn clone $1 $REPONAME --log-window-size=100000
-        cd $REPONAME
-        echo Adding remote
-        git remote add origin bbgithub:$2/$REPONAME
-        echo Pushing repo
-        git push -u origin master
-        echo Open repo at https://bbgithub.dev.bloomberg.com/$2/$REPONAME
-        echo Enable branch protection on master! Immediately!
-    }
-
     r()
     {
         CMD=`fc -l -100 | grep ^$1 | sed -e 's,^[0-9 \t]*\(.*\),\1,'`
@@ -219,10 +100,6 @@
     lt() {
         clear
         tail -f -n 10 $1 | bblc
-    }
-
-    llc() {
-        llcalc --buildtag=stage --create $1 && llcalc --buildtag=stage --run --unbounded $1
     }
 
     srchcpp() {
@@ -251,22 +128,6 @@
             git pull origin master
             cd ..
         done
-    }
-
-    getips() {
-        for rhst in "$@"
-        do
-            HOSTS=`grep -i $rhst /bb/bin/bbcpu.lst | cut -d' ' -f1`
-            for host in $HOSTS
-            do
-                nslookup $host | grep "Address:" | tail -1 | sed -e "s/Address/$host/"
-            done
-        done
-    }
-
-    exd() {
-        NEWDISPLAY=`tmux show-environment | grep DISPLAY`
-        export $NEWDISPLAY
     }
 
     clf() {
@@ -308,5 +169,3 @@
     }
 
     prompt
-    #jpssi
-    #echo "System Ready"
