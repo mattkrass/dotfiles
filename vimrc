@@ -16,6 +16,7 @@ Bundle 'istepura/vim-toolbar-icons-silk'
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
+Bundle 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
