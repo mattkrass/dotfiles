@@ -29,7 +29,19 @@ autoload -U compinit
 compinit -u
 
 # source aliases
-source ~/.zshenv
+if [[ -a ~/.zshenv ]]; then
+    source ~/.zshenv
+fi
+
+# source local zshrc if it exists
+if [[ -a ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
+
+# source local zshenv for aliases if it exists
+if [[ -a ~/.zshenv.local ]]; then
+    source ~/.zshenv.local
+fi
 
 # functions
 npad() {
