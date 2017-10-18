@@ -117,7 +117,6 @@ let g:ycm_semantic_triggers =  {
   \   'lua' : ['.', ':'],
   \   'erlang' : [':'],
   \ }
-"let g:ycm_path_to_python_interpreter="/opt/bb/bin/python"
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 "diagmode of ycm
