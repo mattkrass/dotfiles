@@ -19,6 +19,7 @@ Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'christoomey/vim-tmux-navigator'
+Bundle 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -116,7 +117,7 @@ let g:ycm_semantic_triggers =  {
   \   'lua' : ['.', ':'],
   \   'erlang' : [':'],
   \ }
-let g:ycm_path_to_python_interpreter="/opt/bb/bin/python"
+"let g:ycm_path_to_python_interpreter="/opt/bb/bin/python"
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 "diagmode of ycm

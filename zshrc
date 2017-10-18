@@ -20,6 +20,9 @@ git-prompt-info() {
 PROMPT='[%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
 '
 RPROMPT=''
+# vim mode please
+bindkey -v
+bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 autoload -U compinit
