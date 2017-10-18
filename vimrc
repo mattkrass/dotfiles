@@ -16,6 +16,9 @@ Bundle 'istepura/vim-toolbar-icons-silk'
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -153,3 +156,9 @@ set splitbelow
 
 " mouse me
 set mouse=a
+
+" NERDTree quit on open file
+let g:NERDTreeQuitOnOpen=1
+" NERDTree shortcut
+map <C-n> :NERDTreeToggle<CR>
+
