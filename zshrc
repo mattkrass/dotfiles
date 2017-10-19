@@ -1,6 +1,5 @@
 setopt prompt_subst
 setopt extended_glob
-# export TERM=xterm-256color we should move this to local config
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=2500
 export SAVEHIST=2500
