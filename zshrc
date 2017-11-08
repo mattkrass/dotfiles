@@ -3,6 +3,11 @@ setopt extended_glob
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=2500
 export SAVEHIST=2500
+
+window-title() {
+    print -Pn "\e]0;$1\a"
+}
+
 git-prompt-info() {
     git_status=$(git status 2>&1)
     branch_name=$(echo $git_status | grep "On branch" | cut -d" " -f3)
@@ -19,6 +24,7 @@ git-prompt-info() {
 PROMPT='[%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
 '
 RPROMPT=''
+
 # vim mode please
 bindkey -v
 bindkey "^H" backward-delete-char
@@ -92,3 +98,6 @@ sizedirs() {
         du -csh $i | grep -v total
     done
 }
+
+# set window title
+window-title "ZSH Terminal"

@@ -65,8 +65,9 @@ set vb t_vb=""
 noremap <S-D> "_dd
 
 " set font
+let g:airline_powerline_fonts = 1
 if has('gui_running')
-    set guifont=Terminess\ Powerline\ 12
+    set guifont=Cousine\ For\ Powerline\ 10
 endif
 
 if &term =~ '256color'
