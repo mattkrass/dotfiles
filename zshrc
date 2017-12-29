@@ -60,7 +60,7 @@ mcd() {
 tm() {
     tmux attach
     if [[ $? != 0 ]]; then
-        ~/launch_tmux.sh
+        ~/.launch_tmux.sh
     fi
 }
 

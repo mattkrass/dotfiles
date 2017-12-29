@@ -19,6 +19,7 @@ backupTargetAndLink $HOME/.emacs $BASEDIR/emacs
 
 # tmux config files
 backupTargetAndLink $HOME/.tmux.conf $BASEDIR/tmux.conf
+backupTargetAndLink $HOME/.launch_tmux.sh $BASEDIR/launch_tmux.sh
 
 # vim config files
 backupTargetAndLink $HOME/.vimrc $BASEDIR/vimrc
