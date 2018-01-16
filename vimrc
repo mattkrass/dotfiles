@@ -20,6 +20,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'christoomey/vim-tmux-navigator'
 Bundle 'tomasr/molokai'
+Bundle 'altercation/vim-colors-solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,8 +38,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 """""" END VUNDLE CONFIG
 "
-" set molokai colorscheme
-colorscheme molokai
+" set solarized colorscheme
+colorscheme solarized
 set background=dark
 
 set updatetime=250
