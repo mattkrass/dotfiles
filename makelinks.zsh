@@ -23,6 +23,8 @@ backupTargetAndLink $HOME/.launch_tmux.sh $BASEDIR/launch_tmux.sh
 
 # vim config files
 backupTargetAndLink $HOME/.vimrc $BASEDIR/vimrc
+mkdir -p $HOME/.config/nvim
+backupTargetAndLink $HOME/.config/nvim/init.vim $BASEDIR/init.vim
 
 # Xdefaults file
 backupTargetAndLink $HOME/.Xdefaults $BASEDIR/Xdefaults
