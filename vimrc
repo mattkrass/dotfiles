@@ -44,7 +44,9 @@ set background=dark
 
 set updatetime=250
 syntax on
-set ttymouse=xterm2
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 set mouse=a
 
 "Information on the following setting can be found with

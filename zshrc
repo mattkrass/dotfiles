@@ -22,7 +22,7 @@ git-prompt-info() {
 }
 
 PROMPT='[%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
-'
+➡ '
 RPROMPT=''
 
 # vim mode please
@@ -60,7 +60,7 @@ mcd() {
 tm() {
     tmux attach
     if [[ $? != 0 ]]; then
-        ~/.launch_tmux.sh
+        tmux
     fi
 }
 
@@ -98,6 +98,3 @@ sizedirs() {
         du -csh $i | grep -v total
     done
 }
-
-# set window title
-window-title "ZSH Terminal"
