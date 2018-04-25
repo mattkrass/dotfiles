@@ -13,7 +13,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'istepura/vim-toolbar-icons-silk'
-Bundle 'Valloric/YouCompleteMe'
+if !has('nvim')
+    Bundle 'Valloric/YouCompleteMe'
+endif
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'vim-airline/vim-airline'
@@ -21,6 +23,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'christoomey/vim-tmux-navigator'
 Bundle 'tomasr/molokai'
 Bundle 'altercation/vim-colors-solarized'
+Plugin 'rking/ag.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
