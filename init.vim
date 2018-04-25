@@ -8,20 +8,21 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/home/mkrass1/.dein.vim/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.dein.vim/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/home/mkrass1/.dein.vim')
-    call dein#begin('/home/mkrass1/.dein.vim')
+if dein#load_state('$HOME/.dein.vim')
+    call dein#begin('$HOME/.dein.vim')
 
     " Let dein manage dein
     " Required:
-    call dein#add('/home/mkrass1/.dein.vim/repos/github.com/Shougo/dein.vim')
+    call dein#add('$HOME/.dein.vim/repos/github.com/Shougo/dein.vim')
 
     " Add or remove your plugins here:
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('zchee/deoplete-clang')
     call dein#add('neomake/neomake')
+    call dein#add('tpope/vim-fugitive')
 
     " Required:
     call dein#end()
