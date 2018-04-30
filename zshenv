@@ -11,6 +11,7 @@ alias gdg="git difftool --tool=gvimdiff --no-prompt"
 alias gpu="git push -u origin \$(git status | grep 'On branch' | sed -e 's/On branch //g')"
 alias gff="git pull origin \$(git status | grep 'On branch' | sed -e 's/On branch //g') --ff-only"
 alias gffu="git pull upstream \$(git status | grep 'On branch' | sed -e 's/On branch //g') --ff-only"
+alias gcxffd='echo -n "Confirm nuclear option? " && read answer && if [ "yes" = "${answer}" ] ; then git clean -x -f -f -d ; fi'
 alias gc="git commit"
 alias gca="git commit -a"
 alias gcm="git commit -m"
