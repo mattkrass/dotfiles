@@ -1,38 +1,24 @@
+(require 'package)
 
-;;; Install mouse wheel for scrolling
-(mwheel-install)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
-;;; Turn off beeping
-(setq visible-bell t)
-
-;;; Turn off any startup messages
-(setq inhibit-startup-message 0)
-(setq inhibit-scratch-message nil)
-
-;;; Turn off annoying cordump on tooltip "feature" 
-(setq x-gtk-use-system-tooltips nil)
-
-;;; Insert spaces instead of tabs
-(setq-default indent-tabs-mode nil)
-
-;;; Line numbers and column numbers
-(column-number-mode t)
-(line-number-mode t)
-(global-linum-mode t)
-
+(setq package-enable-at-startup nil)
+(package-initialize)
 (custom-set-variables
- '(load-home-init-file t t))
-(custom-set-faces)
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (evil-visual-mark-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
-(setq c-basic-offset 4) ;; default comments at 4 spaces
-(c-set-offset 'innamespace 0) ;; namespaces shouldn't cause indentation
-(show-paren-mode t) ;; show matching parenthesis
-(c-set-offset 'access-label -2) ;; private, public etc. indent at two spaces
-
-;; load headers files .h as C++ mode not c
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)) ;; treat .h as C++ no C
-
-;; trying to et font
-(add-to-list 'default-frame-alist '(font . "Terminess Powerline-12"))
-(set-face-attribute 'default nil :font "Terminess Powerline-12")
-(set-frame-font "Terminess Powerline-12" nil t)
+(require 'evil)
+(evil-mode t)
+(setq vc-follow-symlinks nil)
