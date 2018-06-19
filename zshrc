@@ -4,6 +4,16 @@ export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=2500
 export SAVEHIST=2500
 
+rc-prompt-info() {
+    local RC=$?
+    local OUT=$(printf '%03d' $RC)
+    if [[ $RC -ne 0 ]]; then
+        print -P %F{white}%K{red}$OUT%f%k
+    else
+        print -P $OUT
+    fi
+}
+
 window-title() {
     print -Pn "\e]0;$1\a"
 }
@@ -21,7 +31,7 @@ git-prompt-info() {
     fi
 }
 
-PROMPT='[%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
+PROMPT='$(rc-prompt-info) [%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
 ➡ '
 RPROMPT=''
 
