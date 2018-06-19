@@ -4,6 +4,18 @@ export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=2500
 export SAVEHIST=2500
 
+function zle-line-init zle-keymap-select {
+#   RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+#   RPS2=$RPS1
+    PROMPT='$(rc-prompt-info) [%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
+${${KEYMAP/vicmd/%F{white\}%K{red\}normal%f%k }/(main|viins)/%F{white\}%K{green\}insert%f%k }➡ '
+    RPROMPT=''
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 rc-prompt-info() {
     local RC=$?
     local OUT=$(printf '%03d' $RC)
