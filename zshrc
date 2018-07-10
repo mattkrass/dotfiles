@@ -5,8 +5,8 @@ export HISTSIZE=2500
 export SAVEHIST=2500
 
 function zle-line-init zle-keymap-select {
-#   RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-#   RPS2=$RPS1
+    setopt localoptions no_ksharrays
+    [[ "${@[2]-}" == opp ]] && return
     PROMPT='$(rc-prompt-info) [%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
 ${${KEYMAP/vicmd/%F{white\}%K{red\}normal%f%k }/(main|viins)/%F{white\}%K{green\}insert%f%k }➡ '
     RPROMPT=''
