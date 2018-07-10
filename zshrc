@@ -121,4 +121,16 @@ sizedirs() {
     done
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+
+    # Search a file with fzf inside a Tmux pane and then open it in an editor
+    fvim() {
+      local file=$(fzf)
+      # Open the file if it exists
+      if [ -n "$file" ]; then
+        # Use the default editor if it's defined, otherwise Vim
+        ${EDITOR:-vim} "$file"
+      fi
+    }
+fi
