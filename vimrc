@@ -172,3 +172,6 @@ map <C-n> :NERDTreeToggle<CR>
 " Use ^G to list current function
 autocmd BufNewFile,BufRead *.cpp map <C-g> :echo getline(search('\v^[[:alpha:]$_]', "bn", 1, 100))<CR>
 autocmd BufNewFile,BufRead *.py map <C-g> :echo getline(search('\v^.*def]', "bn", 1, 100))<CR>
+
+" enable fzf
+set rtp+=~/.fzf

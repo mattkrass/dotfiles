@@ -120,3 +120,5 @@ sizedirs() {
         du -csh $i | grep -v total
     done
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
