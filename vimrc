@@ -73,7 +73,7 @@ noremap <S-D> "_dd
 " set font
 let g:airline_powerline_fonts = 1
 if has('gui_running')
-    set guifont=Cousine\ For\ Powerline\ 10
+    set guifont=Meslo\ LG\ M\ for\ Powerline\ 11
 endif
 
 if &term =~ '256color'
