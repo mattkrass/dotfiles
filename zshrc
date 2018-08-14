@@ -5,8 +5,6 @@ export HISTSIZE=2500
 export SAVEHIST=2500
 
 function zle-line-init zle-keymap-select {
-    setopt localoptions no_ksharrays
-    [[ "${@[2]-}" == opp ]] && return
     PROMPT='$(rc-prompt-info) [%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
 ${${KEYMAP/vicmd/%F{white\}%K{red\}normal%f%k }/(main|viins)/%F{white\}%K{green\}insert%f%k }➡ '
     RPROMPT=''
@@ -20,7 +18,7 @@ rc-prompt-info() {
     local RC=$?
     local OUT=$(printf '%03d' $RC)
     if [[ $RC -ne 0 ]]; then
-        print -P %F{white}%K{red}$OUT%f%k
+        print -P "\033[41m\033[37m$OUT\033[0m"
     else
         print -P $OUT
     fi
@@ -42,10 +40,6 @@ git-prompt-info() {
         fi
     fi
 }
-
-PROMPT='$(rc-prompt-info) [%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
-➡ '
-RPROMPT=''
 
 # vim mode please
 bindkey -v
