@@ -31,7 +31,7 @@ window-title() {
 git-prompt-info() {
     git_status=$(git status 2>&1)
     branch_name=$(echo $git_status | grep "On branch" | cut -d" " -f3)
-    clean_status=$(echo $git_status | grep "clean")
+    clean_status=$(echo $git_status | grep "working tree clean")
     if [[ -n $branch_name ]]; then
         if [[ -z $clean_status ]]; then
             print -P %F{red}\($branch_name\)%f
