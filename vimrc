@@ -42,7 +42,7 @@ filetype plugin indent on    " required
 """""" END VUNDLE CONFIG
 "
 " set solarized colorscheme
-colorscheme solarized
+colorscheme molokai
 set background=dark
 
 set updatetime=250
@@ -149,6 +149,8 @@ vnoremap <leader>p c()<ESC>Pl
 vnoremap <leader>[ c[ ]<ESC>Pl
 vnoremap <leader>] c{ }<ESC>Pl
 
+" <leader>c to lowerCamelCase a selection
+vnoremap <leader>c :s/_\([a-zA-Z]\)/\U\1/g<CR>
 " auto comma a line
 noremap <leader>, :s/\(.*\)/\1,/<CR>
 noremap <leader>< :s/,\w*$//<CR>
