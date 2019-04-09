@@ -1,5 +1,7 @@
 setopt prompt_subst
 setopt extended_glob
+setopt inc_append_history
+setopt share_history
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=2500
 export SAVEHIST=2500
@@ -29,6 +31,18 @@ window-title() {
 }
 
 git-prompt-info() {
+    for d in "${(@s/;/)GIT_IGNORE}"; do
+        if [[ "$(basename $PWD)" == "$d" ]]; then
+            print -P %F{yellow}\($(git branch | grep \* | cut -d ' ' -f2)\)%f
+        return 0
+        fi;
+    done
+
+    if [[ $SIMPLE_GIT == "yes" ]]; then
+        print "<git disabled>"
+        return 0
+    fi
+
     git_status=$(git status 2>&1)
     branch_name=$(echo $git_status | grep "On branch" | cut -d" " -f3)
     clean_status=$(echo $git_status | grep "working tree clean")
