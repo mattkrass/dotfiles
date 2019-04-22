@@ -31,10 +31,11 @@ window-title() {
 }
 
 git-prompt-info() {
+    local REPO_ROOT=$(basename $(git rev-parse --show-toplevel 2>&1 | tr '\n' ' ' | sed "s/fatal.*/\//g"))
     for d in "${(@s/;/)GIT_IGNORE}"; do
-        if [[ "$(basename $PWD)" == "$d" ]]; then
+        if [[ "$REPO_ROOT" == "$d" ]]; then
             print -P %F{yellow}\($(git branch | grep \* | cut -d ' ' -f2)\)%f
-        return 0
+            return 0
         fi;
     done
 
