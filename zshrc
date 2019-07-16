@@ -132,6 +132,11 @@ gpa() {
     done
 }
 
+gbu() {
+    git fetch upstream
+    git checkout --no-track -b $1 upstream/master
+}
+
 sizedirs() {
     for i in `lrt | grep '^d' | rev | cut -d' ' -f 1 | rev | sed -e 's./..'`
     do
