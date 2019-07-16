@@ -2,6 +2,7 @@ setopt prompt_subst
 setopt extended_glob
 setopt inc_append_history
 setopt share_history
+setopt autopushd
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=2500
 export SAVEHIST=2500
@@ -53,6 +54,14 @@ git-prompt-info() {
         else
             print -P %F{green}\($branch_name\)%f
         fi
+    fi
+}
+
+tmssh() {
+    if [ $TMUX ]; then
+        ${TMUX_BIN} new-window -n $1 "ssh $1"
+    else
+        ssh $1
     fi
 }
 
