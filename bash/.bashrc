@@ -157,14 +157,12 @@
     set -o vi
 
 # SETTING PROMPT
-    source ~/.git-completion.sh
-
     function prompt {
         local RED="\[\033[0;31m\]"
         local GREEN="\[\033[0;32m\]"
         local BLUEBOLD="\[\033[1;34m\]"
         local RESET="\[\033[00m\]"
-        export PS1="\n[\t]$GREEN \u@\h$RESET:$BLUEBOLD\$PWD$RESET$RED"'$(__git_ps1)'"$RESET\n"
+        export PS1="\n[\t]$GREEN \u@\h$RESET:$BLUEBOLD\$PWD$RESET\n"
     }
 
     prompt
