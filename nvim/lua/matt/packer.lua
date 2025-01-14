@@ -12,6 +12,13 @@ return require('packer').startup(function(use)
     }
     use 'Mofiqul/dracula.nvim'
     use "ellisonleao/gruvbox.nvim"
+    use 'tomasr/molokai'
+    use {
+        "loctvl842/monokai-pro.nvim",
+        config = function()
+            require("monokai-pro").setup()
+        end
+    }
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'

@@ -13,9 +13,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'istepura/vim-toolbar-icons-silk'
-if !has('nvim')
-    Bundle 'Valloric/YouCompleteMe'
-endif
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'vim-airline/vim-airline'
@@ -101,48 +98,10 @@ map <silent> M :silent<CR>:view<CR>G:sleep 100m<CR>M
 " insert blank lines in normal mode with Enter
 nnoremap <Enter> o<ESC>
 
-"YouCompleteMe
-"-----------------------------------
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_max_diagnostics_to_display = 1000
-let g:ycm_always_populate_location_list = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-"this is experimental, these should be default settings!
-let g:ycm_auto_trigger = 1
-let g:ycm_semantic_triggers =  {
-  \   'c' : ['->', '.'],
-  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-  \             're!\[.*\]\s'],
-  \   'ocaml' : ['.', '#'],
-  \   'cpp,objcpp' : ['->', '.', '::'],
-  \   'perl' : ['->'],
-  \   'php' : ['->', '::'],
-  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-  \   'ruby' : ['.', '::'],
-  \   'lua' : ['.', ':'],
-  \   'erlang' : [':'],
-  \ }
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-"diagmode of ycm
-nnoremap <F3> <Esc> :YcmDiags<CR>
-nnoremap <F2> :YcmCompleter FixIt<CR>
-nnoremap <F7> :YcmCompleter GoToDefinition<CR>
-nnoremap <F8> :YcmCompleter GoToDeclaration<CR>
-
 "always show gutter aka sign column, and clear its colour
 autocmd BufEnter * sign define dummy
 autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 highlight clear SignColumn
-
-"Only enable ycm for certain types of file
-let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1, 'python': 1}
-
-" use F9 for quickfix toggling
-" this needs asyncrun.vim to work
-noremap <F9> :call asyncrun#quickfix_toggle(8)<CR>
 
 " <leader>p,[,{ to paren/bracket wrap a selection
 vnoremap <leader>p c()<ESC>Pl
