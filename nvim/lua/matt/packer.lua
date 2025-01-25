@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
     }
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
-    use('tpope/vim-fugitive')
+    -- use('tpope/vim-fugitive')
     use {
       'nvim-lualine/lualine.nvim',
       requires = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -47,4 +47,12 @@ return require('packer').startup(function(use)
     use('sbdchd/neoformat')
     use('folke/trouble.nvim')
     use('vim-ctrlspace/vim-ctrlspace')
+    use('nvim-tree/nvim-tree.lua')
+    use {
+        'NeogitOrg/neogit',
+        requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
+        config = function()
+            require('neogit').setup {}
+        end,
+    }
 end)
