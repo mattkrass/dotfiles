@@ -46,4 +46,5 @@ return require('packer').startup(function(use)
     }
     use('sbdchd/neoformat')
     use('folke/trouble.nvim')
+    use('vim-ctrlspace/vim-ctrlspace')
 end)
