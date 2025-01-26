@@ -37,23 +37,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --- pyright doesn't dynamically recognize a virtualenv, so we have to help it
 local path = require('lspconfig/util').path
 local function get_python_path(workspace)
-  -- Use activated virtualenv.
-  if vim.env.VIRTUAL_ENV then
-    local result = path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
-    print('in venv logic, result =', result)
-    return result
-  end
-
-  -- Find and use virtualenv in workspace directory.
-  for _, pattern in ipairs({'*', '.*'}) do
-    local match = vim.fn.glob(path.join(workspace, pattern, 'pyvenv.cfg'))
-    if match ~= '' then
-      return path.join(path.dirname(match), 'bin', 'python')
+    -- Use activated virtualenv.
+    if vim.env.VIRTUAL_ENV then
+        local result = path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+        print('in venv logic, result =', result)
+        return result
     end
-  end
 
-  -- Fallback to system Python.
-  return exepath('python3') or exepath('python') or 'python'
+    -- Find and use virtualenv in workspace directory.
+    for _, pattern in ipairs({ '*', '.*' }) do
+        local match = vim.fn.glob(path.join(workspace, pattern, 'pyvenv.cfg'))
+        if match ~= '' then
+            return path.join(path.dirname(match), 'bin', 'python')
+        end
+    end
+
+    -- Fallback to system Python.
+    return exepath('python3') or exepath('python') or 'python'
 end
 
 -- You'll find a list of language servers here:
@@ -71,9 +71,9 @@ require('lspconfig').markdown_oxide.setup({})
 require('lspconfig').ruff.setup({})
 require('lspconfig').rust_analyzer.setup({})
 require('lspconfig').pyright.setup({
-  before_init = function(_, config)
-    config.settings.python.pythonPath = get_python_path(config.root_dir)
-  end
+    before_init = function(_, config)
+        config.settings.python.pythonPath = get_python_path(config.root_dir)
+    end
 })
 require('typescript-tools').setup({})
 
