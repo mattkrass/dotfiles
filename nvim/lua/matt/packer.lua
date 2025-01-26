@@ -55,4 +55,18 @@ return require('packer').startup(function(use)
             require('neogit').setup {}
         end,
     }
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 500
+            require("which-key").setup {}
+        end,
+    }
+    use {
+        'akinsho/bufferline.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+    }
+    use('rmagatti/auto-session')
+    use('stevearc/dressing.nvim')
 end)
