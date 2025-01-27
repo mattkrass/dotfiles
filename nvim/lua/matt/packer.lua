@@ -6,6 +6,12 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use {
+        'christoomey/vim-tmux-navigator',
+        config = function()
+            require("monokai-pro").setup()
+        end
+    }
+    use {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
@@ -23,12 +29,10 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
-    use('theprimeagen/harpoon')
     use('mbbill/undotree')
-    -- use('tpope/vim-fugitive')
     use {
-      'nvim-lualine/lualine.nvim',
-      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
     -- LSP Stuff
@@ -49,13 +53,6 @@ return require('packer').startup(function(use)
     use('vim-ctrlspace/vim-ctrlspace')
     use('nvim-tree/nvim-tree.lua')
     use {
-        'NeogitOrg/neogit',
-        requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
-        config = function()
-            require('neogit').setup {}
-        end,
-    }
-    use {
         "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
@@ -67,6 +64,14 @@ return require('packer').startup(function(use)
         'akinsho/bufferline.nvim',
         requires = { 'nvim-tree/nvim-web-devicons' },
     }
+    -- nvim v0.7.2
+    use({
+        "kdheepak/lazygit.nvim",
+        -- optional for floating window border decoration
+        requires = {
+            "nvim-lua/plenary.nvim",
+        },
+    })
     use('rmagatti/auto-session')
     use('stevearc/dressing.nvim')
     use('stevearc/conform.nvim')
