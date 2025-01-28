@@ -75,4 +75,8 @@ return require('packer').startup(function(use)
     use('rmagatti/auto-session')
     use('stevearc/dressing.nvim')
     use('stevearc/conform.nvim')
+    use {
+        'sindrets/diffview.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+    }
 end)
