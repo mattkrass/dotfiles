@@ -6,7 +6,7 @@ conform.setup {
         json = { 'prettier' },
         yaml = { 'prettier' },
         markdown = { 'prettier' },
-        python = { 'isort', 'black' },
+        python = { 'black' },
     },
     format_on_save = {
         lsp_fallback = true,

@@ -5,12 +5,7 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
-    use {
-        'christoomey/vim-tmux-navigator',
-        config = function()
-            require("monokai-pro").setup()
-        end
-    }
+    use 'christoomey/vim-tmux-navigator'
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         -- or                            , branch = '0.1.x',
@@ -39,6 +34,9 @@ return require('packer').startup(function(use)
     use('neovim/nvim-lspconfig')
     use('hrsh7th/nvim-cmp')
     use('hrsh7th/cmp-nvim-lsp')
+    use('hrsh7th/cmp-buffer')
+    use('hrsh7th/cmp-path')
+    use('onsails/lspkind.nvim')
     use('williamboman/mason.nvim')
 
     use {
@@ -64,7 +62,12 @@ return require('packer').startup(function(use)
         'akinsho/bufferline.nvim',
         requires = { 'nvim-tree/nvim-web-devicons' },
     }
-    -- nvim v0.7.2
+    use {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup()
+        end
+    }
     use({
         "kdheepak/lazygit.nvim",
         -- optional for floating window border decoration

@@ -51,9 +51,6 @@ local function get_python_path(workspace)
             return path.join(path.dirname(match), 'bin', 'python')
         end
     end
-
-    -- Fallback to system Python.
-    return exepath('python3') or exepath('python') or 'python'
 end
 
 -- You'll find a list of language servers here:
@@ -89,7 +86,21 @@ cmp.setup({
             vim.snippet.expand(args.body)
         end,
     },
-    mapping = cmp.mapping.preset.insert({}),
+    formatting = {
+        format = require("lspkind").cmp_format({
+            maxwidth = 50,
+            ellipsis_char = "...",
+        }),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+        ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+    }),
 })
 
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
