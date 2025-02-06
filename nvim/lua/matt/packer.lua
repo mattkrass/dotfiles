@@ -82,4 +82,10 @@ return require('packer').startup(function(use)
         'sindrets/diffview.nvim',
         requires = { 'nvim-tree/nvim-web-devicons' },
     }
+    use {
+        'akinsho/git-conflict.nvim',
+        config = function()
+            require("git-conflict").setup()
+        end
+    }
 end)
