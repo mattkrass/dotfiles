@@ -9,6 +9,11 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) 
 vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })                 --  go to previous tab
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
+-- buffer management
+vim.keymap.set("n", "gb", "<cmd>bn<CR>", { desc = "Go to next buffer" })
+vim.keymap.set("n", "gB", "<cmd>bp<CR>", { desc = "Go to previous buffer" })
+vim.keymap.set("n", "gX", "<cmd>bd<CR>", { desc = "Delete/close current buffer" })
+
 -- diff shortcuts
 vim.keymap.set("n", "<leader>dv", "<cmd>DiffviewFileHistory<CR>", { desc = "Open repository history" })
 vim.keymap.set("n", "<leader>df", "<cmd>DiffviewFileHistory --follow %<CR>", { desc = "Open file history" })

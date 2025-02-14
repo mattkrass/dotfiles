@@ -88,4 +88,6 @@ return require('packer').startup(function(use)
             require("git-conflict").setup()
         end
     }
+    use('OXY2DEV/markview.nvim')
+    use('b0o/schemastore.nvim')
 end)
