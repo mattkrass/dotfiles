@@ -1,6 +1,5 @@
 return {
     "neovim/nvim-lspconfig",
-    "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/nvim-cmp",
@@ -9,13 +8,14 @@ return {
         "hrsh7th/cmp-path",
         "onsails/lspkind.nvim",
         "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
     },
     config = function()
         -- Reserve a space in the gutter
         vim.opt.signcolumn = 'yes'
 
-	-- Set up mason-lspconfig to auto install LSPs
-	require("mason-lspconfig").setup({ automatic_installation = true })
+        -- Set up mason-lspconfig to auto install LSPs
+        require("mason-lspconfig").setup({ automatic_installation = true })
 
         -- Add cmp_nvim_lsp capabilities settings to lspconfig
         -- This should be executed before you configure any language server
@@ -69,7 +69,6 @@ return {
         -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
         -- These are example language servers.
         require('lspconfig').gleam.setup({})
-        require('lspconfig').ocamllsp.setup({})
         require('lspconfig').clangd.setup({})
         require('lspconfig').cmake.setup({})
         require('lspconfig').docker_compose_language_service.setup({})
