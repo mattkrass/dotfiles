@@ -14,9 +14,6 @@ return {
         -- Reserve a space in the gutter
         vim.opt.signcolumn = 'yes'
 
-        -- Set up mason-lspconfig to auto install LSPs
-        require("mason-lspconfig").setup({ automatic_installation = true })
-
         -- Add cmp_nvim_lsp capabilities settings to lspconfig
         -- This should be executed before you configure any language server
         local lspconfig_defaults = require('lspconfig').util.default_config
