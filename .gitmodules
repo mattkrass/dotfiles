@@ -1,0 +1,3 @@
+[submodule "alacritty/.config/alacritty/tokyo-night-alacritty-theme"]
+	path = alacritty/.config/alacritty/tokyo-night-alacritty-theme
+	url = https://github.com/zatchheems/tokyo-night-alacritty-theme

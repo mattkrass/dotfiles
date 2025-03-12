@@ -1,0 +1,9 @@
+import = [
+    "~/.config/alacritty/tokyo-night-alacritty-theme/tokyo-night.toml",
+]
+
+[font]
+normal = { family = "MesloLGSNerdFontMono", style = "Regular" }
+bold = { family = "MesloLGSNerdFontMono", style = "Bold" }
+italic = { family = "MesloLGSNerdFontMono", style = "Italic" }
+bold_italic = { family = "MesloLGSNerdFontMono", style = "BoldItalic" }
