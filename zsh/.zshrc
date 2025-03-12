@@ -1,159 +1,123 @@
-setopt prompt_subst
-setopt extended_glob
-setopt inc_append_history
-setopt share_history
-setopt autopushd
-export HISTFILE=$HOME/.zsh_history
-export HISTSIZE=2500
-export SAVEHIST=2500
-
-function zle-line-init zle-keymap-select {
-    PROMPT='$(rc-prompt-info) [%D{%H:%M:%S}] %F{34}%n@%B%m%b%f:%B%F{63}%/%f%b $(git-prompt-info)
-${${KEYMAP/vicmd/%F{white\}%K{red\}normal%f%k }/(main|viins)/%F{white\}%K{green\}insert%f%k }➡ '
-    RPROMPT=''
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-rc-prompt-info() {
-    local RC=$?
-    local OUT=$(printf '%03d' $RC)
-    if [[ $RC -ne 0 ]]; then
-        print -P "\033[41m\033[37m$OUT\033[0m"
-    else
-        print -P $OUT
-    fi
-}
-
-window-title() {
-    print -Pn "\e]0;$1\a"
-}
-
-git-prompt-info() {
-    local REPO_ROOT=$(basename $(git rev-parse --show-toplevel 2>&1 | tr '\n' ' ' | sed "s/fatal.*/\//g"))
-    for d in "${(@s/;/)GIT_IGNORE}"; do
-        if [[ "$REPO_ROOT" == "$d" ]]; then
-            print -P %F{yellow}\($(git branch | grep \* | cut -d ' ' -f2)\)%f
-            return 0
-        fi;
-    done
-
-    if [[ $SIMPLE_GIT == "yes" ]]; then
-        print "<git disabled>"
-        return 0
-    fi
-
-    git_status=$(git status 2>&1)
-    branch_name=$(echo $git_status | grep "On branch" | cut -d" " -f3)
-    clean_status=$(echo $git_status | grep "working tree clean")
-    if [[ -n $branch_name ]]; then
-        if [[ -z $clean_status ]]; then
-            print -P %F{red}\($branch_name\)%f
-        else
-            print -P %F{green}\($branch_name\)%f
-        fi
-    fi
-}
-
-tmssh() {
-    if [ $TMUX ]; then
-        ${TMUX_BIN} new-window -n $1 "ssh $1"
-    else
-        ssh $1
-    fi
-}
-
-# vim mode please
-bindkey -v
-bindkey "^H" backward-delete-char
-bindkey "^?" backward-delete-char
-bindkey '^R' history-incremental-search-backward
-autoload -U compinit
-compinit -u
-
-# source aliases
-if [[ -a ~/.zshenv ]]; then
-    source ~/.zshenv
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# source local zshrc if it exists
-if [[ -a ~/.zshrc.local ]]; then
-    source ~/.zshrc.local
-fi
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/Library/Python/3.7/bin:$PATH
 
-# source local zshenv for aliases if it exists
-if [[ -a ~/.zshenv.local ]]; then
-    source ~/.zshenv.local
-fi
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/matt/.oh-my-zsh"
 
-# functions
-npad() {
-    gvim -geometry 70x60 $1 
-}
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-mcd() {
-    mkdir -p $1; cd $1
-}
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-tm() {
-    tmux attach
-    if [[ $? != 0 ]]; then
-        tmux
-    fi
-}
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-srchcpp() {
-    grep "$@" -R * --include='*.cpp' -n -H
-}
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-srchhdr() {
-    grep "$@" -R * --include='*.h' -n -H
-}
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-srchsrc() {
-    grep "$@" -R * --include='*.h' --include='*.cpp' --include='*.c' --include='*.py' --include='*.pl' --include='*.sh' --include='*.js' --include='*.ts' --include='*.cs' -n -H
-}
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
-gsa() {
-    for d in */; do
-        cd $d
-        git status
-        cd ..
-    done
-}
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-gpa() {
-    for d in */; do
-        cd $d
-        git pull origin master
-        cd ..
-    done
-}
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
-gbu() {
-    git fetch upstream
-    git checkout --no-track -b $1 upstream/master
-}
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-sizedirs() {
-    for i in `lrt | grep '^d' | rev | cut -d' ' -f 1 | rev | sed -e 's./..'`
-    do
-        du -csh $i | grep -v total
-    done
-}
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-if [ -f ~/.fzf.zsh ]; then
-    source ~/.fzf.zsh
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-    # Search a file with fzf inside a Tmux pane and then open it in an editor
-    fvim() {
-      local file=$(fzf)
-      # Open the file if it exists
-      if [ -n "$file" ]; then
-        # Use the default editor if it's defined, otherwise Vim
-        ${EDITOR:-vim} "$file"
-      fi
-    }
-fi
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git vi-mode zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+alias k=kubectl
+source <(kubectl completion zsh)
+alias JQL='jq -C . | less -R'
+
+export NVM_DIR="$HOME/projects/codepods/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export BAT_THEME=Coldark-Dark
+export PATH="/opt/homebrew/opt/openjdk/bin:$HOME/.cargo/bin:$PATH"
+
+eval "$(fzf --zsh)"
