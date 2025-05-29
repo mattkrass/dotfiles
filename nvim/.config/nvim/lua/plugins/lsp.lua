@@ -70,7 +70,12 @@ return {
         require('lspconfig').cmake.setup({})
         require('lspconfig').docker_compose_language_service.setup({})
         require('lspconfig').eslint.setup({})
-        require('lspconfig').groovyls.setup({})
+        require('lspconfig').groovyls.setup {
+            cmd = { "java", "-jar", path.join(
+                vim.env.HOME,
+                ".local/share/nvim/mason/packages/groovy-language-server/build/libs/groovy-language-server-all.jar"
+            ) },
+        }
         require('lspconfig').lua_ls.setup({ settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
         require('lspconfig').markdown_oxide.setup({})
         require('lspconfig').ruff.setup({})
