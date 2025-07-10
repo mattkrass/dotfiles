@@ -4,6 +4,6 @@ return {
     config = function()
         -- set up key mapping
         vim.g.CtrlSpaceDefaultMappingKey = "<C-Space> "
-        vim.keymap.set("n", "<C-Space>", "<cmd>CtrlSpace<CR>", { desc = "Open CtrlSpace" })
+        vim.keymap.set("n", "<Space><Space>", "<cmd>CtrlSpace<CR>", { desc = "Open CtrlSpace" })
     end
 }
