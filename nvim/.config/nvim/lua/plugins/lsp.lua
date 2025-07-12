@@ -9,6 +9,7 @@ return {
         "onsails/lspkind.nvim",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+        "nvim-java/nvim-java",
     },
     config = function()
         -- Reserve a space in the gutter
@@ -87,6 +88,7 @@ return {
         })
         require('lspconfig').yamlls.setup({})
         require('typescript-tools').setup({})
+        require('lspconfig').jdtls.setup({})
 
         local cmp = require('cmp')
 
