@@ -116,3 +116,6 @@ fi
 if type -p fzf >/dev/null; then
     eval "$(fzf --zsh)"
 fi
+
+# Restore history search behavior with zsh-vi-mode on
+zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
