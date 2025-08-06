@@ -70,6 +70,17 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# Restore history search behavior with zsh-vi-mode on
+zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
+
+# zsh-vi-mode config function
+zvm_config() {
+    # Always starting with insert mode for each command line
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -116,6 +127,3 @@ fi
 if type -p fzf >/dev/null; then
     eval "$(fzf --zsh)"
 fi
-
-# Restore history search behavior with zsh-vi-mode on
-zvm_after_init_commands+=("bindkey '^[[A' up-line-or-search" "bindkey '^[[B' down-line-or-search")
