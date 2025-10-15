@@ -9,7 +9,7 @@ config.font_size = 16
 
 --- window configuration
 config.enable_tab_bar = false
-config.window_decorations = "RESIZE"
+config.window_decorations = "TITLE | RESIZE"
 
 config.color_scheme = 'Dracula (Official)'
 

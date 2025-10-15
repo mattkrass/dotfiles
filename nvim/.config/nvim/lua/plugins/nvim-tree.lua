@@ -31,12 +31,6 @@ return {
                     },
                 },
             },
-            update_focused_file = {
-                enable = true,
-                update_root = {
-                    enable = true,
-                },
-            }
         })
 
         vim.keymap.set("n", "<C-n>", vim.cmd.NvimTreeFindFileToggle, { desc = "Toggle NvimTree find-file mode" })

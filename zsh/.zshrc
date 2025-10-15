@@ -127,3 +127,6 @@ fi
 if type -p fzf >/dev/null; then
     eval "$(fzf --zsh)"
 fi
+
+# Created by `pipx` on 2025-09-24 04:08:14
+export PATH="$PATH:$HOME/.local/bin"
