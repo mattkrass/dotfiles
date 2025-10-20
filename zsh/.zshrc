@@ -77,6 +77,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+if type -p fzf >/dev/null; then
+    zvm_after_init_commands+=("source <(fzf --zsh)")
+fi
+
 zvm_after_init_commands+=("bindkey '^[[A' up-line-or-beginning-search" "bindkey '^[[B' down-line-or-beginning-search")
 zvm_config() {
     # Always starting with insert mode for each command line
@@ -171,10 +175,6 @@ pyenv() {
     command pyenv "$command" "$@";;
   esac
 }
-
-if type -p fzf >/dev/null; then
-    eval "$(fzf --zsh)"
-fi
 
 ~/.bin/lyrical.sh
 
