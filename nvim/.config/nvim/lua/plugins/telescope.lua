@@ -3,6 +3,21 @@ return {
     version = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+        require('telescope').setup({
+            pickers = {
+                buffers = {
+                    mappings = {
+                        i = {
+                            ["<c-d>"] = require("telescope.actions").delete_buffer,
+                        },
+                        n = {
+                            ["<c-d>"] = require("telescope.actions").delete_buffer,
+                            ["dd"] = require("telescope.actions").delete_buffer, -- Optional: for normal mode dd
+                        },
+                    },
+                }
+            }
+        })
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Telescope find files' })
         vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope git files' })
