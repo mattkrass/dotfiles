@@ -144,7 +144,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:/opt/homebrew/bin:$PATH"
-eval export PATH="$HOME/.pyenv/shims:${PATH}"
+export PATH="$HOME/.pyenv/shims:${PATH}"
 export PYENV_SHELL=zsh
 source $(brew --prefix pyenv)/completions/pyenv.zsh
 command pyenv rehash 2>/dev/null
