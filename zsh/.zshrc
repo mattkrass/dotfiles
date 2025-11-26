@@ -213,10 +213,6 @@ export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 
-# Cool git stuff
-GIT_PREFIX=$(brew --prefix git)
-export GIT_EXEC_PATH=${GIT_PREFIX}/share/git-core/contrib/git-jump:$(git --exec-path)
-
 # to the batconfig!
 export BAT_THEME=Coldark-Dark
 export BAT_STYLE=numbers
