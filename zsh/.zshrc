@@ -14,7 +14,7 @@ zstyle ':omz:update' mode disabled
 ZSH_DISABLE_COMPFIX="true"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/mkrass1/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -97,9 +97,6 @@ plugins=(
     zsh-vi-mode
     zsh-autosuggestions
 )
-source $HOME/.zshenv
-source $HOME/.zshenv.local
-source $HOME/.zshrc.local
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -134,33 +131,22 @@ source $ZSH/oh-my-zsh.sh
 # Redefine gpristine to exclude my .venv and .lcldev paths
 alias gpristine='git reset --hard && git clean -dffx -e .venv -e .lcldev'
 
-
 mcd() {
     mkdir -p $1; cd $1
 }
 
-bbghapi() {
-    curl --request GET \
-        -H 'Accept: application/vnd.github.antiope-preview+json' \
-        -H 'Accept: application/vnd.github.v3+json' \
-        -H 'Accept: application/vnd.github.zzzax-preview+json' \
-        -H 'Content-type: application/json' \
-        -H "Authorization: token $(grep token ~/.bbgithub | tr ' ' '\n' | tail -n 1)" \
-        https://bbgithub.dev.bloomberg.com/api/v3/$1 2>/dev/null
-}
-
-bbgh_token_copy() {
-    grep token ~/.bbgithub | tr ' ' '\n' | tail -n 1 | pbcopy
-}
+alias ls="eza --icons=always"
+alias lrt="eza --icons=always -lsnew"
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:/opt/homebrew/bin:$PATH"
-eval export PATH="/Users/mkrass1/.pyenv/shims:${PATH}"
+eval export PATH="$HOME/.pyenv/shims:${PATH}"
 export PYENV_SHELL=zsh
-source '/opt/homebrew/Cellar/pyenv/2.6.7/completions/pyenv.zsh'
+source $(brew --prefix pyenv)/completions/pyenv.zsh
 command pyenv rehash 2>/dev/null
 pyenv() {
   local command
@@ -176,77 +162,10 @@ pyenv() {
   esac
 }
 
-~/.bin/lyrical.sh
-
-clonefork()
-{
-    ~/.clonefork.sh $1
-}
-
-pbnj-test-push()
-{
-    local branch=$(git branch --show-current)
-    echo gwip && pbnj_release_brancher --branch=$branch-test && gpsup -f && gco $branch
-}
-
-prco()
-{
-    local rmt_name=origin
-    if [[ `git remote | grep upstream` ]] then
-        rmt_name=upstream
-    fi
-    git fetch $rmt_name pull/$1/head:PR-$1
-    git checkout PR-$1
-}
-
-empty-push()
-{
-    git commit --allow-empty -m "Empty commit" && git push
-}
-
-scrape-from-release()
-{
-    find . -name \*.groovy -exec git checkout $1 {} \;
-}
-
-export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 
 # to the batconfig!
 export BAT_THEME=Coldark-Dark
 export BAT_STYLE=numbers
 
-# make groovylint mildly less irritated
-export JAVA_HOME=/opt/homebrew/Cellar/openjdk/23.0.2/
-
-# Make Kerberos happy
-export DPKG_KERBEROS_HOST_BY_ADDR=1
-export DPKG_KERBEROS_DISABLE_CBT=1
-
-# NodeProxy
-export HTTP_PROXY="http://127.0.0.1:8888/"
-export http_proxy="http://127.0.0.1:8888/"
-export HTTPS_PROXY="http://127.0.0.1:8888/"
-export https_proxy="http://127.0.0.1:8888/"
-
-# Set up uv
-export UV_INSTALLER_GHE_BASE_URL=https://py-uv.s3.dev.bcs.bloomberg.com
-export UV_PYTHON_INSTALL_MIRROR=https://py-uv.s3.dev.bcs.bloomberg.com/py
-export UV_INDEX_URL=https://artprod.dev.bloomberg.com/artifactory/api/pypi/bloomberg-pypi/simple
-export UV_EXTRA_INDEX_URL=https://artprod.dev.bloomberg.com/artifactory/api/pypi/bloomberg-pypi-macos/simple
-
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
-
-# Make DPKG API happy
-dpkg-bsso()
-{
-    export DPKG_PORTAL_AUTH_MODE="jwt"
-    export DPKG_PORTAL_TOKEN=$(bbb-token-gen bsso)
-}
-
-source ~/.lcldevrc
-
-alias ls="eza --icons=always"
-alias lrt="eza --icons=always -lsnew"
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
