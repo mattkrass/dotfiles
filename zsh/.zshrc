@@ -169,3 +169,5 @@ export BAT_THEME=Coldark-Dark
 export BAT_STYLE=numbers
 
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
+
+~/.bin/lyrical.sh
