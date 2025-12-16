@@ -16,5 +16,14 @@ return {
         vim.lsp.enable('rust_analyzer')
         vim.lsp.enable('typescript-tools')
         vim.lsp.enable('yamlls')
+
+        -- Keymaps
+        vim.api.nvim_create_autocmd("LspAttach", {
+            desc = "LSP Keymaps",
+            callback = function(event)
+                local opts = { buffer = event.buf }
+                vim.keymap.set("n", "grd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+            end,
+        })
     end,
 }
