@@ -13,6 +13,11 @@ vim.keymap.set("n", "gb", "<cmd>bn<CR>", { desc = "Go to next buffer" })
 vim.keymap.set("n", "gB", "<cmd>bp<CR>", { desc = "Go to previous buffer" })
 vim.keymap.set("n", "gX", "<cmd>bd<CR>", { desc = "Delete/close current buffer" })
 
+-- Typo city
+vim.api.nvim_create_user_command('W', ":w", {})
+vim.api.nvim_create_user_command('Wq', ":wq", {})
+vim.api.nvim_create_user_command('Wqa', ":wqa", {})
+
 -- diff shortcuts
 vim.keymap.set("n", "<leader>dv", "<cmd>DiffviewFileHistory<CR>", { desc = "Open repository history" })
 vim.keymap.set("n", "<leader>df", "<cmd>DiffviewFileHistory --follow %<CR>", { desc = "Open file history" })
