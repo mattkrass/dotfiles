@@ -96,6 +96,7 @@ plugins=(
     git
     zsh-vi-mode
     zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -137,7 +138,6 @@ mcd() {
 
 alias ls="eza --icons=always"
 alias lrt="eza --icons=always -lsnew"
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -146,7 +146,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:/opt/homebrew/bin:$PATH"
 export PATH="$HOME/.pyenv/shims:${PATH}"
 export PYENV_SHELL=zsh
-source $(brew --prefix pyenv)/completions/pyenv.zsh
+
 command pyenv rehash 2>/dev/null
 pyenv() {
   local command
