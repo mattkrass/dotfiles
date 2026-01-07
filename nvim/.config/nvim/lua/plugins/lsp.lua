@@ -3,7 +3,30 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         -- Configurations
-        vim.lsp.config('lua_ls', { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
+        vim.lsp.config('lua_ls', {
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = 'LuaJIT',
+                    },
+                    diagnostics = {
+                        globals = { 'vim' }, -- Explicitly tell the server that 'vim' is a global variable
+                    },
+                    workspace = {
+                        checkThirdParty = false,
+                        -- Adds Neovim's runtime files to the workspace library for better accuracy
+                        library = {
+                            vim.env.VIMRUNTIME,
+                            -- You can add other plugin directories here if needed
+                            -- vim.fn.stdpath('config') .. '/lua/plugins',
+                        },
+                    },
+                    telemetry = {
+                        enable = false,
+                    },
+                },
+            }
+        })
 
         -- Enablements
         vim.lsp.enable('clangd')
