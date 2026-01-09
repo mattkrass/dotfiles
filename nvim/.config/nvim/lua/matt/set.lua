@@ -14,3 +14,6 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
