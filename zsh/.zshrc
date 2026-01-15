@@ -137,6 +137,7 @@ mcd() {
 
 alias ls="eza --icons=always"
 alias lrt="eza --icons=always -lsnew"
+alias cdc="cd;clear"
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
