@@ -29,6 +29,7 @@ return {
         })
 
         -- Enablements
+        vim.lsp.enable('bashls')
         vim.lsp.enable('clangd')
         vim.lsp.enable('cmake')
         vim.lsp.enable('eslint')

@@ -1,21 +1,24 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    opts = {
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = false,
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+        vim.api.nvim_create_autocmd("FileType", {
+          callback = function(ev)
+            if pcall(vim.treesitter.start) then
+              -- if you want ts folds...
+              if vim.treesitter.query.get(ev.match, "folds") then
+                vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                vim.wo[0][0].foldmethod = "expr"
+              end
 
-        -- Automatically install missing parsers when entering buffer
-        -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-        auto_install = true,
-        highlight = {
-            enable = true,
-
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-            -- Using this option may slow down your editor, and you may see some duplicate highlights.
-            -- Instead of true it can also be a list of languages
-            additional_vim_regex_highlighting = false,
-        },
-    },
+              -- if you want ts indents...
+              if vim.treesitter.query.get(ev.match, "indents") then
+                vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+              end
+            end
+          end,
+        })
+    end,
 }
