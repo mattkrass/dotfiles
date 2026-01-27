@@ -33,6 +33,7 @@ return {
         vim.lsp.enable('clangd')
         vim.lsp.enable('cmake')
         vim.lsp.enable('eslint')
+        vim.lsp.enable('gopls')
         vim.lsp.enable('lua_ls')
         vim.lsp.enable('markdown_oxide')
         vim.lsp.enable('pyright')
