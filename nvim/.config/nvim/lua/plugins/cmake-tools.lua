@@ -11,6 +11,6 @@ return {
     init = function(plugin)
         vim.keymap.set("n", "<leader>cg", "<cmd>CMakeGenerate<CR>", { desc = "Generate a CMake project" })                     -- open new tab
         vim.keymap.set("n", "<leader>cb", "<cmd>CMakeBuild<CR>", { desc = "Build a CMake project" })                     -- open new tab
-        vim.keymap.set("n", "<leader>ct", "<cmd>CMakeBuild<CR>", { desc = "Test a CMake project" })                     -- open new tab
+        vim.keymap.set("n", "<leader>ct", "<cmd>CMakeRunTest<CR>", { desc = "Test a CMake project" })                     -- open new tab
     end,
 }
