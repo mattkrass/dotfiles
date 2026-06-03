@@ -135,6 +135,16 @@ mcd() {
     mkdir -p $1; cd $1
 }
 
+if [[ $(uname) == "Darwin" ]]; then
+    psefw() {
+        watch "ps -ww -e -o 'user pid ppid pgid stime time args ' | awk 'NR==1 || /$1/ && ! /awk/'"
+    }
+elif [[ $(uname) == "Linux" ]]; then
+    psefw() {
+        watch "ps -ww -e -o 'user pid ppid nlwp pgid sid stime time args ' | awk 'NR==1 || /$1/ && ! /awk/'"
+    }
+fi
+
 alias ls="eza --icons=always"
 alias lrt="eza --icons=always -lsnew"
 alias cdc="cd;clear"
